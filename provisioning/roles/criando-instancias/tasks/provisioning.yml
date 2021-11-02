@@ -4,7 +4,7 @@
     name: "{{ sec_group_name }}"
     description: sg iac
     profile: "{{ profile }}"
-    region: "{{ region }}""
+    region: "{{ region }}"
     rules:
     - proto: tcp
       from_port: 22
@@ -58,4 +58,4 @@
   with_items: "{{ ec2.instances }}"
   args:
     tags:
-      Name: ansible-{{ item.ami_lauch_index|int +1 }}
+      Name: ansible-{{ item.ami_launch_index|int +1 }}

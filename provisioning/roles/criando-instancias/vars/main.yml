@@ -1,9 +1,9 @@
 ---
 # vars file for criando-instancias
 instance_type: t2.nano
-sec_group_name: iac
-image: ami-0b418580298265d5c
-keypair: iac
+sec_group_name: 
+image: ami-
+keypair: 
 region: us-east-2
 count: 3
-profile: marcsfel
+profile: 
