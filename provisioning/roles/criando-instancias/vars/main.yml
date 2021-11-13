@@ -4,6 +4,6 @@ instance_type: t2.nano
 sec_group_name: 
 image: ami-
 keypair: 
-region: us-east-2
-count: 3
-profile: 
+region: 
+count: 
+profile:
