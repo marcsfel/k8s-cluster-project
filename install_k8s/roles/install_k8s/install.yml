@@ -8,7 +8,7 @@
 
 - name: Adicionando o repo do k8s
   apt_repository:
-    repo: deb https://apt.kubernets.io/ kubernetes-xenial main
+    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
     state: present
 
 - name: Instalando os pacotes kubeadm, kubelet e kubectl
