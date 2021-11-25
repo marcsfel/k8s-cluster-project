@@ -2,7 +2,7 @@
 # vars file for criando-instancias
 instance_type: t2.medium
 sec_group_name: iac
-image: ami-020db2c14939a8efb
+image: ami-05803413c51f242b7
 keypair: iac
 region: us-east-2
 count: 3
