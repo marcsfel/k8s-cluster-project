@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ansible-v1
+spec:
+  replicas: {{ numbers_replicas_old_version }}
+  selector:
+    matchLabels:
+      app: ansible
+  template:
+    metadata:
+      labels:
+        app: ansible
+        version: {{ old_version }}
+      annotations:
+        prometheus.io/scrape: "{{ prometheus_scrape }}"
+        prometheus.io/port: "{{ prometheus_port }}"
+      spec:
+        containers:
+        - name: ansible
+          image: linuxtips/nginx-prometheus-exporter:{{ version }}
+          env:
+          - name: VERSION
+            value: {{ version }}
+          ports:
+          - containerPort: {{ nginx_port }}
+          - containerPort: {{ prometheus_port }}

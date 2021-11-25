@@ -1,7 +1,7 @@
 - name: Instalando o pip
   apt:
     name:
-      - pip
+      - python-pip
 
 - name: Instalando dependencias dos modulos k8s
   pip:
@@ -16,7 +16,7 @@
     owner: root
     groud: root
     mode: 0644
-    register: copiando_deploy_app_v1
+  register: copiando_deploy_app_v1
 
 - name: Copiando o arquivo de deployment da app v1
   template:
@@ -25,16 +25,18 @@
     owner: root
     groud: root
     mode: 0644
-    register: copiando_deploy_app_v2
+  register: copiando_deploy_app_v2
 
-- name: Deploy da app-v1
+- name: Deploy da app-v2
   k8s:
     state: present
+    namespace: default
     src: /opt/ansible/app-v2.yml
 
 - name: Scale down da app-v1
   k8s:
     state: present
+    namespace: default
     src: /opt/ansible/app-v1.yml
 
 - name: Dentro de 02 minutos o app-v1 sera removido. Precione ctrl + c para cancelar
@@ -44,4 +46,5 @@
 - name: Removendo o app-v1
   k8s:
     state: absent
+    namespace: default
     src: /opt/ansible/app-v1.yml
