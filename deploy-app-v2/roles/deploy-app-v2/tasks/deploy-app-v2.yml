@@ -1,0 +1,47 @@
+- name: Instalando o pip
+  apt:
+    name:
+      - pip
+
+- name: Instalando dependencias dos modulos k8s
+  pip:
+    name:
+      - openshift
+      - PyYAMLs
+
+- name: Copiando o arquivo de deployment da app v1
+  template:
+    src: app-v1.yml.j2
+    dest: /opt/ansible/app-v1.yml
+    owner: root
+    groud: root
+    mode: 0644
+    register: copiando_deploy_app_v1
+
+- name: Copiando o arquivo de deployment da app v1
+  template:
+    src: app-v2.yml.j2
+    dest: /opt/ansible/app-v2.yml
+    owner: root
+    groud: root
+    mode: 0644
+    register: copiando_deploy_app_v2
+
+- name: Deploy da app-v1
+  k8s:
+    state: present
+    src: /opt/ansible/app-v2.yml
+
+- name: Scale down da app-v1
+  k8s:
+    state: present
+    src: /opt/ansible/app-v1.yml
+
+- name: Dentro de 02 minutos o app-v1 sera removido. Precione ctrl + c para cancelar
+  pause:
+    minutes: 2
+
+- name: Removendo o app-v1
+  k8s:
+    state: absent
+    src: /opt/ansible/app-v1.yml
